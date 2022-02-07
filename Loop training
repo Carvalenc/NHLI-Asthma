@@ -1,0 +1,35 @@
+***************************
+***LOOP TRAINING STATA*****
+***************************
+
+**Used for repetitive tasks
+
+**Doing the same estimation for different groups
+
+**Instead of using: 
+
+reg price mpg if foreign ==1
+
+**and
+
+reg price mpg if foreign ==0
+
+**A loop could be used
+
+forvalues b = 0/1 {
+reg price mpg if foreign==`b'
+}
+
+****Another repetitive task that could be performed would
+**be the use of a same estimation command for multiple variables, such as:
+
+ttest price, by(foreign)
+ttest mpg, by(foreign)
+ttest turn, by(foreign)
+
+***A loop could be written saying:
+
+foreach var of varlist {
+
+ttest `var', by(foreign)
+}
