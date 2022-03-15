@@ -50,7 +50,13 @@ gen heartfailure=1
 
 save heart_failure_medcodes.dta, replace 
 
+***All CVD except heart failure 
+
 use Heart_except_heartfailure.dta, clear
+
+gen medcodeid2=medcode 
+
+destring medcodeid, replace 
 
 replace ihd=0 if ihd==.
 
