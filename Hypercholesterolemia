@@ -1,0 +1,92 @@
+Disorders of lipoid metabolism	C32..00
+Disorder of cholesterol metabolism	C32..11
+Pure hypercholesterolaemia	C320.00
+Familial hypercholesterolaemia	C320.11
+Fredrickson type IIa lipidaemia	C320.12
+Low density lipoproteinaemia	C320.13
+Familial hypercholesterolaemia	C320000
+Hyperbetalipoproteinaemia	C320100
+Hyperlipidaemia, group A	C320200
+Low-density-lipoprotein-type (LDL) hyperlipoproteinaemia	C320300
+Fredrickson's hyperlipoproteinaemia, type IIa	C320400
+Familial defective apolipoprotein B-100	C320500
+Polygenic hypercholesterolaemia	C320600
+Other specified pure hypercholesterolaemia	C320y00
+Pure hypercholesterolaemia NOS	C320z00
+Pure hyperglyceridaemia	C321.00
+Fredrickson type IV lipidaemia	C321.11
+Very low density lipoprotinaemia	C321.12
+Hypertriglyceridaemia	C321000
+Mixed hyperlipidaemia	C322.00
+Fredrickson type IIb lipidaemia	C322.11
+Fredrickson type III lipidaemia	C322.12
+Xanthoma tuberosum	C322.13
+Familial combined hyperlipidaemia	C322000
+Hyperchylomicronaemia	C323.00
+Burger - Grute syndrome	C323.11
+Fredrickson type I lipaemia	C323.12
+Fredrickson type V lipaemia	C323.13
+Hyperlipidaemia NOS	C324.00
+Lipoprotein deficiencies	C325.00
+Tangier disease	C325.11
+High density lipoid deficiency	C325000
+Hypo-alpha-lipoproteinaemia	G623.00
+Hypo-beta-lipoproteinaemia	C325200
+A-beta-lipoproteinaemia	C325300
+Bassen-Kornzweig disease	C325311
+Lipoprotein deficiency NOS	C325z00
+Lipodystrophy	C326.00
+Barraquer - Simons disease	C326.11
+Progressive lipodystrophy	C326000
+Lipodystrophy NOS	C326z00
+Lipidoses	C327.00
+Fabry's disease	C327.12
+Gaucher's disease	C327100
+Niemann-Pick disease	C327200
+Wolman disease	C327300
+Primary familial xanthomatosis	C327311
+Alpha-galactosidase A deficiency	C327400
+Fabry's disease	C327411
+Anderson's disease	C327412
+Anderson-Fabry disease	C327413
+Lipidoses NOS	C327z00
+Xanthomatosis, familial	C327z11
+Dyslipidaemia	C328.00
+Hypercholesterolaemia	C329.00
+Other disorders of lipoid metabolism	C32y.00
+Liposynovitis prepatellaris	C32y000
+Hoffa's Disease	C32y011
+Launois-Bensaude's lipomatosis	C32y100
+Lipoid dermatoarthritis	C32y200
+Pelvic lipomatosis	C32y300
+Lipase deficiency	C32y400
+Steatosis	C32y500
+Hepatic familial steatosis	C32y511
+Lipomatosis NEC	C32y600
+Other disorder of lipoid metabolism NOS	C32yz00
+Disorder of lipoid metabolism NOS	C32z.00
+H/O: raised blood lipids	1442
+Serum lipids borderline raised	44O3.00
+Serum lipids high	44O4.00
+Lipids abnormal	44O6.00
+Serum cholesterol raised	44P3.00
+Serum cholesterol very high	44P4.00
+Serum triglycerides raised	44Q3.00
+Lipid disorder treatment started	66X0.00
+Lipid disorder treatment changed	66X2.00
+Lipid disorder initial assessment	66X3.00
+Lipid disorder follow-up assessment	66X4.00
+Lipid lowering therapy	8B28.00
+Cholesterol reduction programme	8BAG.00
+Cholesterol reduction programme - invited	8BAG000
+Cholesterol reduction program - attended	8BAG100
+Patient on maximal tolerated lipid lowering therapy	8BL1.00
+Referral to GP - lipid management	8H6E.00
+Referral to lipid clinic	8HT1.00
+Lipid lowering therapy declined	8I3J.00
+Seen in lipid clinic	9N0I.00
+Seen in cholesterol clinic	9N0J.00
+[X]Other lipid storage disorders	Cyu8900
+[X]Other hyperlipidaemia	Cyu8D00
+[X]Lipid-lowering drug adverse reaction	U60C900
+[V]Dietary surveillance in hypercholesterolaemia	ZV65317
