@@ -88,6 +88,72 @@ by exposed, sort: su setid
 
 ***Risk factors
 
+*****
+*****
+***************************************
+***Merging all the COPD datasets
+
+use copd_aurum1nd, clear
+
+merge 1:1 patid using copd_aurum2nd
+
+drop _merge 
+
+merge 1:1 patid using copd_aurum3nd
+
+tab copd 
+
+save copd_merged.dta, replace
+
+****************************************
+*****
+
+by COPD, sort: su age_start
+
+**The dates for start and finish are 
+
+display %dM_d_CY 16071
+*January 1 2004
+
+display %dM_d_CY 21533
+*December 15 2018
+
+display %dM_d_CY -36524
+
+display %dM_d_CY 2936549
+
+gen COPDvalid=0
+
+replace COPDvalid=1 if obsdate>index_match & obsdate<.
+
+replace COPDvalid=0 if obsdate> 22109
+
+gen COPDvalid2=0
+
+replace COPDvalid2=1 if obsdate<index_match & obsdate<.
+
+replace COPDvalid2=0 if obsdate> 22109
+
+display date("13/07/2020","DMY")
+
+tab COPDvalid 
+
+***There are 2,152,926
+**74,660
+
+tab COPDvalid exposed, col chi 
+
+tab COPDvalid2 exposed, col chi 
+
+
+
+************************************
+************************************
+**#CHECKING THE DATA ON THE EXPOSED
+************************************
+************************************
+
+
 **#COPD in exposed 
 
 ***
@@ -158,70 +224,6 @@ tab copd
 
 save copd_aurum3nd.dta, replace
 
-*****
-*****
-***************************************
-***Merging all the COPD datasets
-
-use copd_aurum1nd, clear
-
-merge 1:1 patid using copd_aurum2nd
-
-drop _merge 
-
-merge 1:1 patid using copd_aurum3nd
-
-tab copd 
-
-save copd_merged.dta, replace
-
-****************************************
-*****
-
-by COPD, sort: su age_start
-
-**The dates for start and finish are 
-
-display %dM_d_CY 16071
-*January 1 2004
-
-display %dM_d_CY 21533
-*December 15 2018
-
-display %dM_d_CY -36524
-
-display %dM_d_CY 2936549
-
-gen COPDvalid=0
-
-replace COPDvalid=1 if obsdate>index_match & obsdate<.
-
-replace COPDvalid=0 if obsdate> 22109
-
-gen COPDvalid2=0
-
-replace COPDvalid2=1 if obsdate<index_match & obsdate<.
-
-replace COPDvalid2=0 if obsdate> 22109
-
-display date("13/07/2020","DMY")
-
-tab COPDvalid 
-
-***There are 2,152,926
-**74,660
-
-tab COPDvalid exposed, col chi 
-
-tab COPDvalid2 exposed, col chi 
-
-
-
-************************************
-************************************
-**#CHECKING THE DATA ON THE EXPOSED
-************************************
-************************************
 
 **#BMI in exposed 
 
@@ -273,6 +275,10 @@ duplicates tag patid, generate(dup)
 
 duplicates report patid 
 
+******
+**#Aurum therapy on the exposed is MISSING 
+******
+
 ******************************
 **2,868,954 unique observations
 ******************************
@@ -282,7 +288,7 @@ duplicates drop patid, force
 save smoking_exposed_unexposed_070322.dta, replace 
 
 ************************************
-**#Renal failure in exposed 
+**#Chronic kidney failure 
 ************************************
 
 use "/home/cvalenci/Documents/DS169/share/Codelists/Other codes/KidneyFailure_aurum.dta", clear
@@ -669,9 +675,9 @@ merge 1:m patid using dmexpAurumMedcodes3nd.dta
 
 save dmexpaurum.dta, replace 
 
-
-**#DEPRESSION in exposed 
-**
+*************************
+**#Depression in exposed 
+*************************
  
 use "/home/cvalenci/Documents/DS169/share/Codelists/Other codes/depression_medcodes.dta", clear
 
@@ -823,6 +829,7 @@ drop _merge
 
 save chd_nhf_expaurum.dta, replace 
 
+
 ***
 **# Allergy in exposed (food allergy and atopy)
 **
@@ -913,7 +920,6 @@ drop _merge
 
 save foodallexp.dta, replace
 
-
 ***
 **#Atopy in exposed 
 **
@@ -989,6 +995,7 @@ merge 1:1 patid using atopyallexpAurumMedcodes3
 drop _merge 
 
 save atopexp.dta, replace
+
 
 ******************************************
 **#Stroke/Cardiovascular events in exposed    
@@ -1199,12 +1206,17 @@ hist eosvalue109cellperl, normal
 save eosmax15.dta, replace 
 
 ******
-**#****Exposed cohort  
+**#****CVD cohort in the exposed 
 ******
 
 ***COPD 
 
+
+***BMI  
+
 use Exposed_BMI__values_070322.dta, replace
+
+***Smoking BOTH EXPOSED AND UNEXPOSED 
 
 merge 1:1 patid using smoking_exposed_unexposed_070322.dta
 
@@ -1212,16 +1224,61 @@ duplicates report patid
 
 drop _merge
 
+***Chronic Kidney Disease
+
+merge 1:1 patid using chronickidneyexposedaurum
+
+duplicates report patid 
+
+drop _merge
+
+***Heart failure 
+
 merge 1:1 patid using hfexpAurum
 
 drop _merge
+
+***Chronic Liver Disease
 
 merge 1:1 patid using chrlivexpaurum
 
 drop _merge
 
+***Diabetes 
 
+merge 1:1 patid using dmmedcodes
 
+drop _merge 
+
+***Depression 
+
+merge 1:1 patid using depexpAurum
+
+drop _merge 
+
+***Coronary Heart Disease 
+merge 1:1 patid using chd_nhf_expaurum
+
+drop _merge 
+
+***Food allergy 
+merge 1:1 patid using foodallexp
+
+drop _merge 
+
+***Atopy 
+merge 1:1 patid using atopexp
+
+drop _merge 
+
+***Cardiovascular Accidents
+merge 1:1 patid using CVAallexp
+
+drop _merge 
+
+merge 1:1 patid using pnallexp
+
+save cvdcohortexp240322, replace 
 
 ******
 ******
@@ -1376,6 +1433,7 @@ duplicates drop patid, force
 
 save crfunexpAurumMedcodes.dta, replace
 
+
 *****************************
 **#Hyperlipidaemia in unexposed 
 *****************************
@@ -1485,6 +1543,7 @@ duplicates drop patid, force
 
 save depunexpAurumMedcodesnd.dta, replace
 
+
 **#Heart disease in the unexposed 
 
 use "/home/cvalenci/Documents/DS169/share/Codelists/Other codes/Heart_No_hf_medcodes.dta", clear
@@ -1504,6 +1563,7 @@ keep if lat3==obsdate
 duplicates drop patid, force 
 
 save chd_nhf_unexpAurumMedcodes.dta, replace 
+
 
 ****************************
 **#Food allergy in unexposed 
@@ -1526,7 +1586,6 @@ keep if lat3==obsdate
 duplicates drop patid, force 
 
 save foodaunexpAurumMedcodes.dta, replace 
-
 
 ***
 **#Atopy in unexposed 
@@ -1596,9 +1655,76 @@ duplicates drop patid, force
 
 save pnallunexpAurumMedcodes.dta, replace 
 
+******************************************
+**#CVD cohort in unexposed ***************
+******************************************
+
+***COPD in unexposed 
+***MISSING 
+
+**BMI in unexposed 
+
+merge 1:1 patid using Unexposed_BMI030322
+
+drop _merge 
+
+***Smoking in unexposed (already included with the exposed file)
+
+***Therapy in unexposed 
+merge 1:1 patid using Unexposed_Therapy030322
+
+drop _merge 
+
+***Chronic kidney disease in unexposed 
+
+merge 1:1 patid using crfunexpAurumMedcodes
+
+drop _merge 
+
+***Hyperlipidaemia in unexposed 
+merge 1:1 patid using hypliunexpAurumMedcodes
+
+drop _merge 
+
+***Chronic liver disease in unexposed
+cldunexpAurumMedcodes1nd
+
+drop _merge
+
+***Depression in unexposed 
+
+merge 1:1 using depunexpAurumMedcodesnd
+
+drop _merge 
+
+***Chronic heart disease 
+
+chd_nhf_unexpAurumMedcodes
+
+drop _merge 
+
+***Food allergy in unexposed 
+
+merge 1:1 patid using foodaunexpAurumMedcodes
+
+drop _merge 
+
+***Atopy in unexposed 
+
+merge 1:1 patid using atopyunexpAurumMedcodes
+
+drop _merge 
+
+***Cardiovascular accidents in unexposed 
+
+merge 1:1 patid using CVAunexpAurumMedcodes
+
+drop _merge 
+
+***Pneumonia in unexposed 
+merge 1:1 patid using pnallunexpAurumMedcodes
+
 
 **********************************************************************
 **#***********************END OF DO FILE******************************
 **********************************************************************
-
-
