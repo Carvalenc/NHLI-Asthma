@@ -1,0 +1,76 @@
+cd "/cvalenci/NHLI/"
+
+cd "//icnas2.cc.ic.ac.uk/cvalenci/NHLI"
+
+sysuse auto, clear
+
+gen id=_n
+
+gen muestra1="bl1"
+
+keep id muestra1 
+
+save aut1, replace 
+
+sysuse auto, clear
+gen id=_n
+
+gen muestra2="bl2"
+
+keep id muestra2 
+
+save aut2, replace 
+
+sysuse auto, clear
+gen id=_n
+
+gen muestra3="bl3"
+
+rename trunk tronco
+rename rep78 representation
+
+save aut3, replace 
+
+sysuse auto, clear
+gen id=_n
+
+keep id make price mpg
+
+save aut4, replace 
+
+local files aut2 aut3 aut4
+local var muestra2 tronco gear_ratio
+
+foreach f of local files { 
+foreach v of local var {
+use aut1, clear
+merge 1:1 id using `f', keep (master match) keepusing(`v')
+save `f'v2, replace
+}
+}
+
+cd "//icnas2.cc.ic.ac.uk/cvalenci/NHLI"
+
+local filenames : dir "//icnas2.cc.ic.ac.uk/cvalenci/NHLI/" files "aut*" 
+
+local first_file aut of `filenames'
+local filenames aut2
+
+
+
+
+local keyvars id
+
+
+use aut1, clear
+tempfile building
+save `building'
+
+local files aut2 aut3 aut4
+
+foreach f of local files {
+    use "`f'", clear
+    merge 1:1 id using `building', keepnogenerate
+    save `"`building'"', replace
+}
+ 
